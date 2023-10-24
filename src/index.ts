@@ -1,14 +1,7 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
+import { httpServer } from "./http";
 import "./db/index";
-import router from "./routes";
+import websocket from "./websocket/index";
 
-const app = express();
+websocket.connectInWebsocket();
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(router);
-
-app.listen(3333, () => console.log("server running on port 3333"));
+httpServer.listen(3333, () => console.log("server running on port 3333"));

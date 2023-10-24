@@ -2,7 +2,7 @@ import RoomModel from "../models/room";
 import { Request, Response } from "express";
 
 const RoomList = async () => await RoomModel.find();
-const findRoom = async (id: any) => await RoomModel.findById(id);
+const findRoom = async (id: string) => await RoomModel.findById(id);
 const removeOneRoom = async (id: any) => await RoomModel.findByIdAndRemove(id);
 
 const createRoom = async (req: Request, res: Response) => {
