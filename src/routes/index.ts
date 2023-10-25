@@ -10,6 +10,9 @@ router.get("/", (req: Request, res: Response) => {
   });
 });
 
+//signIn
+router.post("/signin", userController.loginUser);
+
 //user routes
 router.get("/user", userController.findUser);
 router.post("/create/user", userController.createUser);

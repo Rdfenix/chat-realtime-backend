@@ -34,4 +34,23 @@ const findUser = async (req: Request, res: Response) => {
   }
 };
 
-export default { createUser, findUser };
+const loginUser = async (req: Request, res: Response) => {
+  try {
+    if (!req.body.username || !req.body.password) {
+      res.status(400).json({ message: "Content cant be empty" });
+    }
+
+    const { username, password } = req.body;
+    const user = await UserModel.findOne({ username });
+
+    if (user && user.password === password) {
+      res.status(200).json({ user, message: "signIn" });
+    } else {
+      res.status(401).json({ message: "Unauthorized" });
+    }
+  } catch (error: any) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export default { createUser, findUser, loginUser };
