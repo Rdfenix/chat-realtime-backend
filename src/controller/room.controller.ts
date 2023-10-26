@@ -30,9 +30,9 @@ const createRoom = async (req: Request, res: Response) => {
 const getAllRooms = async (req: Request, res: Response) => {
   try {
     const rooms = await RoomList();
-    res.status(200).json(rooms);
+    res.status(200).json({ rooms, messages: "Found" });
   } catch (error: any) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ rooms: [], message: error.message });
   }
 };
 
@@ -41,15 +41,17 @@ const deleteRoom = async (req: Request, res: Response) => {
     const data = await removeOneRoom(req.body._id);
     if (!data) {
       res.status(404).send({
-        message: `User not found.`,
+        rooms: [],
+        message: `room not found.`,
       });
     } else {
       res.status(200).send({
-        message: "User deleted successfully!",
+        rooms: [],
+        message: "room deleted successfully!",
       });
     }
   } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ rooms: [], message: error.message });
   }
 };
 
