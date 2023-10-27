@@ -1,5 +1,6 @@
 import RoomModel from "../models/room";
 import { Request, Response } from "express";
+import websocket from "../websocket";
 
 const RoomList = async () => await RoomModel.find();
 const findRoom = async (id: string) => await RoomModel.findById(id);
@@ -19,6 +20,7 @@ const createRoom = async (req: Request, res: Response) => {
 
   try {
     const result = await room.save();
+    websocket.sendRoomMessage("HALL", result, "ADD");
     res.status(200).json(result);
   } catch (error: any) {
     res.status(500).json({
@@ -38,13 +40,15 @@ const getAllRooms = async (req: Request, res: Response) => {
 
 const deleteRoom = async (req: Request, res: Response) => {
   try {
-    const data = await removeOneRoom(req.body._id);
+    const _id = req.query._id;
+    const data = await removeOneRoom(_id);
     if (!data) {
       res.status(404).send({
         rooms: [],
         message: `room not found.`,
       });
     } else {
+      websocket.sendRoomMessage("HALL", data, "DELETE");
       res.status(200).send({
         rooms: [],
         message: "room deleted successfully!",

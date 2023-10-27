@@ -13,8 +13,8 @@ const connectInWebsocket = () => {
     });
 
     socket.on("sendMessage", (data) => {
-      const { room, message } = data;
-      sendRoomMessage(room, message);
+      const { room, message, operation } = data;
+      sendRoomMessage(room, message, operation);
     });
 
     socket.on("disconnect", () => {
@@ -23,8 +23,9 @@ const connectInWebsocket = () => {
   });
 };
 
-const sendRoomMessage = (room: string, data: any) => {
-  io.sockets.in(room).emit("message", data);
+const sendRoomMessage = (room: string, data: any, operation: string) => {
+  const response = { room, data, operation };
+  io.sockets.in(room).emit("message", response);
 };
 
 export default { connectInWebsocket, sendRoomMessage };
