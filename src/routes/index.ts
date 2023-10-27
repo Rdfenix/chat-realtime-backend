@@ -19,6 +19,7 @@ router.post("/create/user", userController.createUser);
 
 //room routes
 router.get("/rooms", roomController.getAllRooms);
+router.get("/room", roomController.getRoom);
 router.post("/create/room", roomController.createRoom);
 router.delete("/delete/room", roomController.deleteRoom);
 

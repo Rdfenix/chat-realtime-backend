@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import websocket from "../websocket";
 
 const RoomList = async () => await RoomModel.find();
-const findRoom = async (id: string) => await RoomModel.findById(id);
+const findRoom = async (id: any) => await RoomModel.findById(id);
 const removeOneRoom = async (id: any) => await RoomModel.findByIdAndRemove(id);
 
 const createRoom = async (req: Request, res: Response) => {
@@ -38,6 +38,16 @@ const getAllRooms = async (req: Request, res: Response) => {
   }
 };
 
+const getRoom = async (req: Request, res: Response) => {
+  try {
+    const id = req.query._id;
+    const room = await findRoom(id);
+    res.status(200).json({ rooms: [room], messages: "Found" });
+  } catch (error: any) {
+    res.status(404).json({ rooms: [], message: error.message });
+  }
+};
+
 const deleteRoom = async (req: Request, res: Response) => {
   try {
     const _id = req.query._id;
@@ -59,4 +69,4 @@ const deleteRoom = async (req: Request, res: Response) => {
   }
 };
 
-export default { createRoom, getAllRooms, deleteRoom };
+export default { createRoom, getAllRooms, deleteRoom, getRoom };
