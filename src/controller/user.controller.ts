@@ -16,7 +16,13 @@ const createUser = async (req: Request, res: Response) => {
 
   try {
     const result = await user.save();
-    res.status(200).json({ user: result, message: "Created" });
+    const data = {
+      name: result.name,
+      username: result.username,
+      _id: result._id,
+      __v: result.__v,
+    };
+    res.status(200).json({ user: data, message: "Created" });
   } catch (error: any) {
     res.status(500).json({
       user: "",
