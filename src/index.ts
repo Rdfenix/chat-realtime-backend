@@ -1,5 +1,5 @@
 import { httpServer } from "./http";
-import "./db/index";
+// import "./db/index";
 import websocket from "./websocket/index";
 const port = process.env.PORT || 5001;
 
