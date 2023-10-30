@@ -1,5 +1,5 @@
 {
-  "name": "chat-realtime-backend",
+  "name": "chat-realtime-backend-1",
   "version": "1.0.0",
   "description": "study project which i use nodejs, express, mongoDB and socket.IO",
   "main": "src/index.ts",
