@@ -5,4 +5,4 @@ const port = process.env.PORT || 5001;
 
 websocket.connectInWebsocket();
 
-httpServer.listen(port, () => console.log("server running on port 5001"));
+httpServer.listen(port, () => console.log(`Server is running on port ${port}`));

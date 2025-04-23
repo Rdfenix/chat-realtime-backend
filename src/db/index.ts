@@ -5,7 +5,7 @@ dotenv.config();
 const username = process.env.MONGO_USERNAME;
 const password = encodeURIComponent(`${process.env.MONGO_PASSWORD}`);
 const cluster = process.env.MONGO_CLUSTER;
-const DATABASE_URL = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority`;
+const DATABASE_URL = `mongodb+srv://${username}:${password}@${cluster}.f8yoehq.mongodb.net/?retryWrites=true&w=majority&appName=${cluster}`;
 
 mongoose.connect(DATABASE_URL, { connectTimeoutMS: 1000 });
 
